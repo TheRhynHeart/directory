@@ -56,5 +56,39 @@ void listByPattern(const fs::path &path) {
         }
     }
 }
+void listFilesMenu(const fs::path &path) {
+    cout << "\n[1] List All Files\n";
+    cout << "[2] List by Extension (e.g., .txt)\n";
+    cout << "[3] List by Pattern (e.g., moha *.*)\n";
+    cout << "Enter choice: ";
+    string choice;
+    getline(cin, choice);
+
+    if (choice == "1") listAllFiles(path);
+    else if (choice == "2") listByExtension(path);
+    else if (choice == "3") listByPattern(path);
+    else cout << "Invalid choice!\n";
+}
+void createDirectory() {
+    string dirname = getInput("\nEnter directory name: ");
+    try {
+        if (fs::create_directory(dirname)) {
+            cout << "Directory '" << dirname << "' created successfully.\n";
+        } else {
+            cout << "Directory '" << dirname << "' already exists.\n";
+        }
+    } catch (const exception &e) {
+        cout << "Error: " << e.what() << endl;
+    }
+}
+void changeDirectory(fs::path &currentPath) {
+    cout << "\n[1] Move to Parent Directory\n";
+    cout << "[2] Move to Root Directory\n";
+    cout << "[3] Enter Custom Path (e.g., C:\\Users\\Documents)\n";
+    cout << "Enter choice: ";
+    string choice;
+    getline(cin, choice);
+
+    fs::path newPath;
 
 
