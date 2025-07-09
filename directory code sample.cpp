@@ -90,5 +90,29 @@ void changeDirectory(fs::path &currentPath) {
     getline(cin, choice);
 
     fs::path newPath;
+    
+    if (choice == "1") {
+        newPath = currentPath.parent_path();
+    } 
+    else if (choice == "2") {
+        newPath = currentPath.root_name().empty() ? "C:\\" : currentPath.root_name().string() + "\\";
+        newPath = "/";
+    } 
+    else if (choice == "3") {
+        string customPath = getInput("\nEnter full path: ");
+        newPath = customPath;
+    } 
+    else {
+        cout << "Invalid choice!\n";
+        return;
+    }
+    if (fs::exists(newPath) && fs::is_directory(newPath)) {
+        currentPath = newPath;
+        fs::current_path(newPath);
+        cout << "Current directory changed to: " << currentPath.string() << endl;
+    } else {
+        cout << "Error: Directory \"" << newPath.string() << "\" not found!" << endl;
+    }
+}
 
 
