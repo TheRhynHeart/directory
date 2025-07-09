@@ -9,7 +9,6 @@ int main() {
 
     while (true) {	
         std::cout << "\nMain Menu:\n";
-        std::cout << "Current Path: " << currentPath.string() << "\n";
         std::cout << "[1] List Files\n";
         std::cout << "[2] Create Directory\n";
         std::cout << "[3] Change Directory\n";
@@ -36,6 +35,25 @@ void listAllFiles(const fs::path &path) {
     cout << "\nFiles in current directory:\n";
     for (const auto &entry : fs::directory_iterator(path)) {
         cout << " - " << entry.path().filename().string() << endl;
+    }
+}
+void listByExtension(const fs::path &path) {
+    string ext = getInput("Enter extension (e.g., .txt): ");
+    cout << "\nFiles with extension " << ext << ":\n";
+    for (const auto &entry : fs::directory_iterator(path)) {
+        if (entry.path().extension() == ext) {
+            cout << " - " << entry.path().filename().string() << endl;
+        }
+    }
+}
+void listByPattern(const fs::path &path) {
+    string pattern = getInput("Enter search pattern: ");
+    cout << "\nFiles matching pattern '" << pattern << "':\n";
+    for (const auto &entry : fs::directory_iterator(path)) {
+        string filename = entry.path().filename().string();
+        if (filename.find(pattern) != string::npos) {
+            cout << " - " << filename << endl;
+        }
     }
 }
 
