@@ -8,13 +8,13 @@ int main() {
     fs::path currentPath = fs::current_path();
 
     while (true) {	
-        cout << "\nMain Menu:\n";
-        cout << "Current Path: " << currentPath.string() << "\n";
-        cout << "[1] List Files\n";
-        cout << "[2] Create Directory\n";
-        cout << "[3] Change Directory\n";
-        cout << "[4] Exit\n";
-        cout << "Enter your choice: ";
+        std::cout << "\nMain Menu:\n";
+        std::cout << "Current Path: " << currentPath.string() << "\n";
+        std::cout << "[1] List Files\n";
+        std::cout << "[2] Create Directory\n";
+        std::cout << "[3] Change Directory\n";
+        std::cout << "[4] Exit\n";
+        std::cout << "Enter your choice: ";
 
         string choice;
         getline(cin, choice);
@@ -38,4 +38,5 @@ void listAllFiles(const fs::path &path) {
         cout << " - " << entry.path().filename().string() << endl;
     }
 }
+
 
