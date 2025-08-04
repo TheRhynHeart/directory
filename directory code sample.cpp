@@ -4,6 +4,28 @@
 using namespace std;
 namespace fs = std::filesystem;
 
+string getInput(const string &prompt) {
+    cout << prompt;
+    string input;
+    getline(cin, input);
+    return input;
+}
+void listAllFiles(const fs::path &path) {
+    cout << "\nFiles in current directory:\n";
+    for (const auto &entry : fs::directory_iterator(path)) {
+        cout << " - " << entry.path().filename().string() << endl;
+    }
+}
+void listByExtension(const fs::path &path) {
+    string ext = getInput("Enter extension (e.g., .txt): ");
+    cout << "\nFiles with extension " << ext << ":\n";
+    for (const auto &entry : fs::directory_iterator(path)) {
+        if (entry.path().extension() == ext) {
+            cout << " - " << entry.path().filename().string() << endl;
+        }
+    }
+}
+
 int main() {
     fs::path currentPath = fs::current_path();
 
